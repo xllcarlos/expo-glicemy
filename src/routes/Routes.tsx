@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { View } from "react-native";
 
 import AuthRoutes from "./AuthRoutes";
+import UserContext from "../contexts/UserContext";
 
 export default function Routes() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { user } = useContext(UserContext);
 
-  if (!isAuthenticated) {
+  if (user === null) {
     return <AuthRoutes />
   }
 
