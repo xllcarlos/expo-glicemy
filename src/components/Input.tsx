@@ -11,6 +11,7 @@ export default function Input({placeholder, func, secret}: InputProps) {
   return(
     <TextInput
       placeholder={placeholder}
+      placeholderTextColor={colors.lightGreen}
       onChangeText={value => func(value)}
       secureTextEntry={secret}
       style={{
