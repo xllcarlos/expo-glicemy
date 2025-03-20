@@ -41,10 +41,55 @@ export function UserProvider({ children }: any) {
     }
   }
 
+  /**
+ * Realize user signup/registration
+ * @param email user email
+ * @param password user password
+ * @param name user full name
+ * @param birthDate user birth date
+ * @param gender user gender
+ * @param phone user phone number
+ * @param diabetesTypeId ID of the diabetes type
+ * @param diagnosisYear year of diabetes diagnosis
+ */
+async function signup(
+  email: string,
+  password: string,
+  name: string,
+  birthDate: string,
+  gender: string,
+  phone: string,
+  diabetesTypeId: string,
+  diagnosisYear: string
+) {
+  try {
+    const req = {
+      url: `${process.env.EXPO_PUBLIC_API_URL}/auth/register`,
+      method: "post",
+      data: {
+        email,
+        password,
+        name,
+        birthDate,
+        gender,
+        phone,
+        diabetesTypeId: parseInt(diabetesTypeId),
+        diagnosisYear: parseInt(diagnosisYear),
+      },
+    };
+    const res = await axios(req);
+    const user: User = res.data;
+    setUser(user);
+  } catch (err: any) {
+    handleSetAlert(err.response?.data?.message || "Erro ao realizar cadastro.");
+  }
+}
+
   return (
     <UserContext.Provider value={{
       user,
-      login
+      login,
+      signup
     }}>
       {children}
     </UserContext.Provider>

@@ -7,9 +7,10 @@ import fonts from "../utils/fonts";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import AppContext from "../contexts/AppContext";
+import Alert from "../components/Alert";
 
 export default function SignUpUserData() {
-  const { handleSetAlert } = useContext(AppContext);
+  const { alert, handleSetAlert } = useContext(AppContext);
 
   const navigation: any = useNavigation();
 
@@ -52,17 +53,18 @@ export default function SignUpUserData() {
       <Text style={styles.title}>
         Cadastre seu email e senha!
       </Text>
+      {alert ? <Alert /> : null}
       <Input
         placeholder="email"
-        func={null}
+        func={(email: string) => setEmail(email)}
       />
       <Input
         placeholder="senha"
-        func={null}
+        func={(password: string) => setPassword(password)}
       />
       <Input
         placeholder="confirmar senha"
-        func={null}
+        func={(confirmPassword: string) => setConfirmPassword(confirmPassword)}
       />
       <Button
         outlined
