@@ -1,6 +1,6 @@
 import React from "react";
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
-import Icon from '@react-native-vector-icons/ionicons';
+import { Ionicons } from '@expo/vector-icons';
 
 import colors from "../utils/colors";
 import fonts from "../utils/fonts";
@@ -19,10 +19,10 @@ export default function SelectInput({ label, func }: SelectInputProps) {
       <Text style={styles.label}>
         {label}
       </Text>
-      <Icon
+      <Ionicons
         name="caret-down-outline"
-        color={colors.gray}
         size={24}
+        color={colors.gray}
       />
     </TouchableOpacity>
   );
@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     height: 48,
+    alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: colors.white,
     borderWidth: 2,
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16
   },
   label: {
-    color: colors.gray,
-    fontSize: fonts.smallText
+    color: colors.lightGreen,
+    fontSize: fonts.mediumText
   }
 });
