@@ -4,6 +4,7 @@ const AppContext = createContext({} as any);
 
 export function AppProvider({ children }: any) {
   const [alert, setAlert] = useState<string | null>(null);
+  const [userLoaded, setUserLoaded] = useState<boolean>(false);
 
   function handleSetAlert(message: string) {
     setAlert(message);
@@ -12,7 +13,8 @@ export function AppProvider({ children }: any) {
 
   return (
     <AppContext.Provider value={{
-      alert, handleSetAlert
+      alert, handleSetAlert,
+      userLoaded, setUserLoaded
     }}>
       {children}
     </AppContext.Provider>
