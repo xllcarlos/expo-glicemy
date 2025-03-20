@@ -1,5 +1,6 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import Input from "../components/Input";
 import SelectInput from "../components/SelectInput";
@@ -8,6 +9,8 @@ import colors from "../utils/colors";
 import fonts from "../utils/fonts";
 
 export default function SignUpPersonalData() {
+  const navigation: any = useNavigation();
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>
@@ -32,7 +35,7 @@ export default function SignUpPersonalData() {
       <Button
         outlined
         label="Avançar"
-        func={null}
+        func={() => navigation.navigate("SignUpHealthData")}
       />
     </View>
   );
