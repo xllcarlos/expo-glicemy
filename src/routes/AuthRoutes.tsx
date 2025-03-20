@@ -6,6 +6,7 @@ import WelcomeScreen from "../screens/WelcomeScreen";
 import LoginScreen from "../screens/LoginScreen";
 import SignUpUserData from "../screens/SignUpUserData";
 import SignUpPersonalData from "../screens/SignUpPersonalData";
+import SignUpHealthData from "../screens/SignUpHealthData";
 
 const AuthStack = createNativeStackNavigator({
   initialRouteName: 'Welcome',
@@ -30,6 +31,12 @@ const AuthStack = createNativeStackNavigator({
     },
     SignUpPersonalData: {
       screen: SignUpPersonalData,
+      options: {
+        title: ''
+      }
+    },
+    SignUpHealthData: {
+      screen: SignUpHealthData,
       options: {
         title: ''
       }
