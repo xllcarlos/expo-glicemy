@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-between',
-    padding: 32
+    padding: 32,
   },
   buttonContainer: {
     gap: 8
@@ -47,6 +47,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: colors.white,
     backgroundColor: colors.darkGreen,
-    padding: 8
+    padding: 8,
   }
 });
