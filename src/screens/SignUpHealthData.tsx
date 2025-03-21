@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { View, StyleSheet, Text } from "react-native";
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 import colors from "../utils/colors";
 import fonts from "../utils/fonts";
@@ -13,6 +13,8 @@ import Alert from "../components/Alert";
 import UserContext from "../contexts/UserContext";
 
 export default function SignUpHealthData() {
+  const navigation: any = useNavigation();
+
   const { alert, handleSetAlert } = useContext(AppContext);
   const { signup } = useContext(UserContext);
 
@@ -57,6 +59,7 @@ export default function SignUpHealthData() {
   function handleSignUp(): void {
     if (validateInputs()) {
       signup(email, password, fullName, birthDate, gender, phone, diabetesTypeId, diagnosisYear);
+      navigation.navigate("SignUpFinish");
     }
   }
 

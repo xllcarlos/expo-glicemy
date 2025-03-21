@@ -3,6 +3,8 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import AppContext from "./AppContext";
+import { useNavigation } from "@react-navigation/native";
+import { NavigationContext } from "@react-navigation/native";
 
 interface User {
   id: number,
@@ -18,6 +20,7 @@ interface User {
 const UserContext = createContext({} as any);
 
 export function UserProvider({ children }: any) {
+
   const { handleSetAlert, setUserLoaded } = useContext(AppContext);
 
   const [user, setUser] = useState<User | null>(null);
@@ -68,11 +71,17 @@ export function UserProvider({ children }: any) {
         },
       };
       const res = await axios(req);
-      const user: User = res.data;
-      setUser(user);
     } catch (err: any) {
       handleSetAlert(err.response?.data?.message || "Erro ao realizar cadastro.");
     }
+  }
+
+  /**
+   * Logout user
+   */
+  function logout() {
+    setUser(null);
+    clearLocalUser();
   }
 
   /**
@@ -93,9 +102,19 @@ export function UserProvider({ children }: any) {
   async function loadLocalUser() {
     const user = await AsyncStorage.getItem('user');
     setUserLoaded(true);
-    console.log(user);
     if (user) {
       setUser(JSON.parse(user));
+    }
+  }
+
+  /**
+   * Clear user data from local storage
+   */
+  async function clearLocalUser() {
+    try { 
+      await AsyncStorage.removeItem('user');
+    } catch (err) {
+      console.log(`clearLocalUser: ${err}`);
     }
   }
 
@@ -103,7 +122,8 @@ export function UserProvider({ children }: any) {
     <UserContext.Provider value={{
       user,
       login,
-      signup
+      signup,
+      logout
     }}>
       {children}
     </UserContext.Provider>
